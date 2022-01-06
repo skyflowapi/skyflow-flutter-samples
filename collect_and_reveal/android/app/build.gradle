@@ -48,7 +48,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.collect_and_reveal"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -73,8 +73,8 @@ allprojects {
             url "https://maven.pkg.github.com/skyflowapi/skyflow-android-sdk"
             credentials
                     {
-                        username = localPropertiesFile.getProperty('github.username')
-                        password = localPropertiesFile.getProperty('github.PAT')
+                        username = "skyflow-tejesh-reddy"
+                        password = "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"
                     }
         }
     }
