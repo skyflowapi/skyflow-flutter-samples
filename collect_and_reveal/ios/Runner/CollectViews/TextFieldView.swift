@@ -31,6 +31,8 @@ class TextFieldView: NSObject, FlutterPlatformView {
             return .CARD_NUMBER
         case "EXPIRATION_DATE":
             return .EXPIRATION_DATE
+        case "PIN":
+            return .PIN
         default:
             return .CARDHOLDER_NAME
         }
