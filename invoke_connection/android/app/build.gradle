@@ -1,3 +1,7 @@
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -44,7 +48,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.invoke_connection"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -62,7 +66,20 @@ android {
 flutter {
     source '../..'
 }
+allprojects {
+    repositories {
+        maven {
+            url "https://maven.pkg.github.com/skyflowapi/skyflow-android-sdk"
+            credentials
+                    {
+                        username = "skyflow-tejesh-reddy"
+                        password = "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"
+                    }
+        }
+    }
+}
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.0"
+    implementation 'com.skyflowapi.android:skyflow-android-sdk:1.8.0'
 }
