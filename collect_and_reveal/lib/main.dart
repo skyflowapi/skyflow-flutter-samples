@@ -15,6 +15,7 @@ class SkyflowFlutterDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -51,20 +52,16 @@ class _CollectFormState extends State<CollectForm> {
 
     return Scaffold(
         appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
         ),
         body: Center(
           // initialize and add necessary Collect TextFields
-            child: ListView(children: [Column(
-                children: [
-                  GetNativeCollectForm(collectFormDetails),
+            child: Column(children: [
+                  Expanded(child: GetNativeCollectForm(collectFormDetails)),
                   ElevatedButton(
                       onPressed: collectDetails,
                       child: const Text("Collect"))
-                ]
-            )]
+            ]
             )
         ));
   }
@@ -80,20 +77,12 @@ class _CollectFormState extends State<CollectForm> {
 
       setState(() {
         _tokens = json.decode(platformResult)["records"][0]["fields"];
+      });
 
-        // Map label to received tokens
-        var nameToToken = {
-          "Card Number": _tokens["primary_card"]["card_number"],
-          "Card Holder Name": _tokens["first_name"],
-          "Expiry Date": _tokens["primary_card"]["expiry_date"],
-          "CVV": _tokens["primary_card"]["cvv"]
-        };
-
-        Navigator.push(
+      Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => RevealForm(tokens: _tokens))
-        );
-      });
+      );
     } on PlatformException catch (e) {
       String message = "Unexpected error";
       if(e.message != null) {
@@ -124,20 +113,19 @@ class RevealForm extends StatelessWidget {
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text("Reveal"),
+          title: const Text("Reveal"),
         ),
         body: Center(
-          // initialize and add necessary Collect TextFields
-            child: ListView(children: [Column(
-                children: [
-                  GetNativeRevealForm(revealFormDetails),
+          // initialize and add necessary Collect Form
+            child: Column(children: [
+              Expanded(child: GetNativeRevealForm(revealFormDetails)),
                   ElevatedButton(
                       onPressed: revealValues,
                       child: const Text("Reveal"))
                 ]
-            )]
             )
-        ));
+            )
+        );
   }
   void revealValues() async {
 

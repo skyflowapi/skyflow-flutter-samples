@@ -1,43 +1,56 @@
 package com.example.collect_and_reveal.CollectViews
 
-import Skyflow.CollectContainer
-import Skyflow.CollectElementOptions
-import Skyflow.SkyflowElementType
-import Skyflow.create
+import Skyflow.*
 import Skyflow.utils.EventName
 import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.collect_and_reveal.utils.DemoCallback
 import io.flutter.Log
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
-internal class AndroidTextField(context: Context, id: Int, client: Skyflow.Client, creationParams: Map<String?, Any?>?) :
+internal class AndroidTextField(context: Context, id: Int, client: Client, creationParams: Map<String?, Any?>?) :
         PlatformView {
-    private val textView: Skyflow.TextField
+    private val collectForm = LinearLayout(context);
 
     override fun getView(): View {
-        return textView
+        return collectForm
     }
 
-    private val collectContainer = skyflowClient.container(ContainerType.COLLECT)
+    private val collectContainer = client.container(ContainerType.COLLECT)
 
     override fun dispose() {}
 
     init {
-        val table = creationParams?.get("table") as String
-        val column = creationParams?.get("column") as String
-        val type = creationParams?.get("type") as String
-        val label = creationParams?.get("label") as String
-        val textFieldInput = Skyflow.CollectElementInput(
-                table = table,
-                column = column,
-                type = getElementType(type),
-                label = label
-        )
-        textView = container.create(context, textFieldInput, CollectElementOptions())
-        textView.setBackgroundColor(Color.rgb(255, 255, 255))
+        val CHANNEL = "skyflow-collect/${id}"
+        collectForm.orientation = LinearLayout.VERTICAL
+        val fields = creationParams?.get("fields") as Map<String, ArrayList<String>>
+        for((label, values) in fields) {
+            val collectInput = CollectElementInput(
+                    table=values[0],
+                    column=values[1],
+                    label=label,
+                    type=getElementType(values[2])
+            )
+
+            val textfield = collectContainer.create(context, collectInput, options = CollectElementOptions(format="mm/yy"))
+            collectForm.addView(textfield)
+        }
+
+        MethodChannel(FlutterEngine(context).dartExecutor, CHANNEL).setMethodCallHandler{ call, result ->
+        if (call.method == "COLLECT") {
+            Log.d("MC", "Collect has been called")
+            this.collectContainer.collect(DemoCallback(result), CollectOptions())
+        } else {
+            result.notImplemented()
+        }}
+
+        collectForm.setBackgroundColor(Color.rgb(255, 255, 255))
 
     }
 

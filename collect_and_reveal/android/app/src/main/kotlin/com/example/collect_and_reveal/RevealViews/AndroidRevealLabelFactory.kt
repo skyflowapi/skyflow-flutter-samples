@@ -1,28 +1,25 @@
 package com.example.collect_and_reveal.RevealViews
 
+import Skyflow.Client
 import Skyflow.Container
+import Skyflow.ContainerType
 import Skyflow.RevealContainer
 import android.content.Context
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 
-internal class AndroidRevealLabelFactory(container: Container<RevealContainer>, callback: (String, AndroidRevealLabel) -> Unit) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+internal class AndroidRevealLabelFactory(client: Client) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
-    private var container: Skyflow.Container<RevealContainer>
-    private var callback: (String, AndroidRevealLabel) -> Unit
+    private var client: Client
 
     init {
-        this.container=  container
-        this.callback = callback
+        this.client=  client
     }
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
         val creationParams = args as Map<String?, Any?>?
-        val revealLabel =  AndroidRevealLabel(context, viewId, container, creationParams)
+        val revealLabel =  AndroidRevealLabel(context, viewId, client, creationParams)
 
-        if (args != null) {
-            this.callback(args.get("label") as String, revealLabel)
-        }
 
         return revealLabel
     }

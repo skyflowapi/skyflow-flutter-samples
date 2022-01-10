@@ -6,33 +6,50 @@ import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.collect_and_reveal.utils.DemoCallback
 import io.flutter.Log
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
-internal class AndroidRevealLabel(context: Context, id: Int, container: Container<RevealContainer>, creationParams: Map<String?, Any?>?) :
+internal class AndroidRevealLabel(context: Context, id: Int, client: Client, creationParams: Map<String?, Any?>?) :
         PlatformView {
-    private val revealLabel: Skyflow.Label
+    private val revealForm = LinearLayout(context)
+    private val revealContainer = client.container(ContainerType.REVEAL)
 
     override fun getView(): View {
-        return revealLabel
+        return revealForm
     }
+
 
     override fun dispose() {}
 
     init {
-        val label = creationParams?.get("label") as String
-        val token = creationParams?.get("token") as String
-        val labelInput = RevealElementInput(
-                token = token,
-                label = label
-        )
 
-        revealLabel = container.create(context, labelInput, RevealElementOptions())
-        revealLabel.setBackgroundColor(Color.rgb(255, 255, 255))
+        val CHANNEL = "skyflow-reveal/${id}"
+
+        revealForm.orientation = LinearLayout.VERTICAL
+        val fields = creationParams?.get("fields") as Map<String, String>
+        for((label, token) in fields) {
+            val labelInput = RevealElementInput(
+                    token = token,
+                    label = label
+            )
+            val revealLabel = revealContainer.create(context, labelInput, RevealElementOptions())
+            revealForm.addView(revealLabel)
+        }
+
+        MethodChannel(FlutterEngine(context).dartExecutor, CHANNEL).setMethodCallHandler{ call, result ->
+            if (call.method == "COLLECT") {
+                Log.d("MC", "Reveal has been called")
+                this.revealContainer.reveal(DemoCallback(result), RevealOptions())
+            } else {
+                result.notImplemented()
+            }}
+
+        revealForm.setBackgroundColor(Color.rgb(255, 255, 255))
     }
 
-    internal fun setToken(token: String) {
-        revealLabel.setToken(token)
-    }
 }

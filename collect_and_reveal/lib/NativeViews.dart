@@ -47,7 +47,7 @@ SizedBox _GetAndroidCollectForm(Map<String, List<String>> collectFormDetails) {
         id: params.id+1,
         viewType: viewType,
         layoutDirection: TextDirection.ltr,
-        creationParams: collectFormDetails,
+        creationParams: {"fields": collectFormDetails},
         creationParamsCodec: StandardMessageCodec(),
         onFocus: () {
           params.onFocusChanged(true);
@@ -101,7 +101,7 @@ SizedBox _GetiOSCollectForm(Map<String, List<String>> collectFormDetails) {
   UiKitView(
     viewType: viewType,
     layoutDirection: TextDirection.ltr,
-    creationParams: collectFormDetails,
+    creationParams: {"fields": collectFormDetails},
     creationParamsCodec: const StandardMessageCodec(),
   )
   );
