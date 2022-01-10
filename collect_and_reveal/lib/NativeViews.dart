@@ -7,36 +7,30 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 // Generic function used to get Native TextField views based on platform
-SizedBox GetNativeTextField(String label, String table, String column, String type) {
+SizedBox GetNativeCollectForm(Map<String, List<String>> collectFormDetails) {
   if(Platform.isAndroid) {
-    return _GetAndroidView(label, table, column, type);
+    return _GetAndroidCollectForm(collectFormDetails);
   } else if(Platform.isIOS) {
-    return _GetiOSTextView(label, table, column, type);
+    return _GetiOSCollectForm(collectFormDetails);
   } else {
     return SizedBox(child: Text("Not supported in ${defaultTargetPlatform.name}"));
   }
 }
 
 // Generic function used to get Native Label views based on platform
-SizedBox GetNativeRevealLabel(String label, String token) {
+SizedBox GetNativeRevealForm(Map<String, String> revealFormDetails) {
   if(Platform.isAndroid) {
-    return _GetAndroidRevealLabel(label, token);
+    return _GetAndroidRevealForm(revealFormDetails);
   } else if(Platform.isIOS) {
-    return _GetiOSRevealLabel(label, token);
+    return _GetiOSRevealForm(revealFormDetails);
   } else {
     return SizedBox(child: Text("Not supported in ${defaultTargetPlatform.name}"));
   }
 }
 
-// Function used to get Android Native TextField views
-SizedBox _GetAndroidView(String label, String table, String column, String type) {
+// Function used to get Android Native Collect Form
+SizedBox _GetAndroidCollectForm(Map<String, List<String>> collectFormDetails) {
   const String viewType = 'android-text-field';
-  var creationParams = Map<String, dynamic>();
-
-  creationParams.putIfAbsent("label", () => label);
-  creationParams.putIfAbsent("table", () => table);
-  creationParams.putIfAbsent("column", () => column);
-  creationParams.putIfAbsent("type", () => type);
 
   return SizedBox(height: 100,child: PlatformViewLink(
     viewType: viewType,
@@ -53,7 +47,7 @@ SizedBox _GetAndroidView(String label, String table, String column, String type)
         id: params.id+1,
         viewType: viewType,
         layoutDirection: TextDirection.ltr,
-        creationParams: creationParams,
+        creationParams: collectFormDetails,
         creationParamsCodec: StandardMessageCodec(),
         onFocus: () {
           params.onFocusChanged(true);
@@ -67,13 +61,9 @@ SizedBox _GetAndroidView(String label, String table, String column, String type)
 
 
 
-// Function used to get Android Native Label views
-SizedBox _GetAndroidRevealLabel(String label, String token) {
+// Function used to get Android Native Reveal Form
+SizedBox _GetAndroidRevealForm(Map<String, String> revealFormDetails) {
   const String viewType = 'android-reveal-label';
-  var creationParams = Map<String, dynamic>();
-
-  creationParams.putIfAbsent("label", () => label);
-  creationParams.putIfAbsent("token", () => token);
 
   return SizedBox(height: 100,child: PlatformViewLink(
     viewType: viewType,
@@ -90,7 +80,7 @@ SizedBox _GetAndroidRevealLabel(String label, String token) {
         id: params.id+1,
         viewType: viewType,
         layoutDirection: TextDirection.ltr,
-        creationParams: creationParams,
+        creationParams: revealFormDetails,
         creationParamsCodec: StandardMessageCodec(),
         onFocus: () {
           params.onFocusChanged(true);
@@ -103,40 +93,29 @@ SizedBox _GetAndroidRevealLabel(String label, String token) {
 }
 
 
-// Function used to get iOS Native TextField views
-SizedBox _GetiOSTextView(String label, String table, String column, String type) {
+// Function used to get iOS Native Collect form
+SizedBox _GetiOSCollectForm(Map<String, List<String>> collectFormDetails) {
   const String viewType = 'iOS-text-field';
-  var creationParams = Map<String, dynamic>();
-
-  creationParams.putIfAbsent("label", () => label);
-  creationParams.putIfAbsent("table", () => table);
-  creationParams.putIfAbsent("column", () => column);
-  creationParams.putIfAbsent("type", () => type);
 
   return SizedBox(height: 100,child:
   UiKitView(
     viewType: viewType,
     layoutDirection: TextDirection.ltr,
-    creationParams: creationParams,
+    creationParams: collectFormDetails,
     creationParamsCodec: const StandardMessageCodec(),
   )
   );
 }
 
 // Function used to get iOS Native Label views
-SizedBox _GetiOSRevealLabel(String label, String token) {
+SizedBox _GetiOSRevealForm(Map<String, String> revealFormDetails) {
   const String viewType = 'iOS-reveal-label';
-
-  var creationParams = Map<String, dynamic>();
-
-  creationParams.putIfAbsent("label", () => label);
-  creationParams.putIfAbsent("token", () => token);
 
   return SizedBox(height: 100,child:
   UiKitView(
     viewType: viewType,
     layoutDirection: TextDirection.ltr,
-    creationParams: creationParams,
+    creationParams: revealFormDetails,
     creationParamsCodec: const StandardMessageCodec(),
   )
   );

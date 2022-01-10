@@ -13,13 +13,15 @@ import android.widget.TextView
 import io.flutter.Log
 import io.flutter.plugin.platform.PlatformView
 
-internal class AndroidTextField(context: Context, id: Int, container: Skyflow.Container<CollectContainer>, creationParams: Map<String?, Any?>?) :
+internal class AndroidTextField(context: Context, id: Int, client: Skyflow.Client, creationParams: Map<String?, Any?>?) :
         PlatformView {
     private val textView: Skyflow.TextField
 
     override fun getView(): View {
         return textView
     }
+
+    private val collectContainer = skyflowClient.container(ContainerType.COLLECT)
 
     override fun dispose() {}
 

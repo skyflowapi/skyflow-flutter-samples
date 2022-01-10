@@ -18,40 +18,36 @@ class SkyflowFlutterDemo extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(title: 'Skyflow Flutter Demo'),
+      home: const CollectForm(title: 'Skyflow Flutter Demo'),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
+class CollectForm extends StatefulWidget {
+  const CollectForm({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<CollectForm> createState() => _CollectFormState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CollectFormState extends State<CollectForm> {
   static const platform = MethodChannel('skyflow');
 
   // Tokens from collect are stored here
   var _tokens = <String, dynamic>{};
-  // RevealElements are Skyflow.Label views of native iOS or Android framework
-  var _revealElements = <Widget>[];
 
   @override
   Widget build(BuildContext context) {
 
-    List<Widget> fields = [
-      GetNativeTextField("Credit Card Number", "pii_fields", "primary_card.card_number", "CARD_NUMBER"),
-      GetNativeTextField("Card Holder", "pii_fields", "first_name", "CARDHOLDER_NAME"),
-      GetNativeTextField("Expiry Date", "pii_fields", "primary_card.expiry_date", "EXPIRATION_DATE"),
-      GetNativeTextField("CVV", "pii_fields", "primary_card.cvv", "CVV"),
-      ElevatedButton(
-          onPressed: collectDetails,
-          child: const Text("Collect"))];
-    fields.addAll(_revealElements);
+    const collectFormDetails = {
+      "Credit Card Number": ["pii_fields", "primary_card.card_number", "CARD_NUMBER"],
+      "Card Holder": ["pii_fields", "first_name", "CARDHOLDER_NAME"],
+      "Expiry Date": ["pii_fields", "primary_card.expiry_date", "EXPIRATION_DATE"],
+      "CVV": ["pii_fields", "primary_card.cvv", "CVV"]
+    };
+
 
     return Scaffold(
         appBar: AppBar(
@@ -61,8 +57,13 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Center(
           // initialize and add necessary Collect TextFields
-            child: ListView(children: [Column(children:
-            fields
+            child: ListView(children: [Column(
+                children: [
+                  GetNativeCollectForm(collectFormDetails),
+                  ElevatedButton(
+                      onPressed: collectDetails,
+                      child: const Text("Collect"))
+                ]
             )]
             )
         ));
@@ -88,18 +89,10 @@ class _HomePageState extends State<HomePage> {
           "CVV": _tokens["primary_card"]["cvv"]
         };
 
-        if(_revealElements.isEmpty) {
-          // Add the tokens received to the map
-          nameToToken.forEach((name, token) {
-            String tokenString = token;
-            _revealElements.add(GetNativeRevealLabel(name, tokenString));
-          });
-          _revealElements.add(ElevatedButton(onPressed: revealValues, child: const Text("Reveal")));
-        } else {
-          nameToToken.forEach((name, token) async {
-            await platform.invokeMethod("SETTOKEN", {"label": name, "token": token});
-          });
-        }
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => RevealForm(tokens: _tokens))
+        );
       });
     } on PlatformException catch (e) {
       String message = "Unexpected error";
@@ -109,8 +102,43 @@ class _HomePageState extends State<HomePage> {
       log("Error: " + message);
     }
   }
+}
 
+class RevealForm extends StatelessWidget {
+  static const platform = MethodChannel('skyflow');
 
+  const RevealForm({Key? key, required this.tokens}) : super(key: key);
+
+  final Map<String, dynamic> tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    var revealFormDetails = {
+      "Card Number": tokens["primary_card"]["card_number"] as String,
+      "Card Holder Name": tokens["first_name"] as String,
+      "Expiry Date": tokens["primary_card"]["expiry_date"] as String,
+      "CVV": tokens["primary_card"]["cvv"] as String,
+    };
+
+    return Scaffold(
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text("Reveal"),
+        ),
+        body: Center(
+          // initialize and add necessary Collect TextFields
+            child: ListView(children: [Column(
+                children: [
+                  GetNativeRevealForm(revealFormDetails),
+                  ElevatedButton(
+                      onPressed: revealValues,
+                      child: const Text("Reveal"))
+                ]
+            )]
+            )
+        ));
+  }
   void revealValues() async {
 
     try {
@@ -119,8 +147,5 @@ class _HomePageState extends State<HomePage> {
       log(e.message!);
     }
   }
-
-
-
 }
 
