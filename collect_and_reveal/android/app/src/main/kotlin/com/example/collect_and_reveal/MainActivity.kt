@@ -12,6 +12,7 @@ import io.flutter.plugin.common.MethodChannel
 
 class MainActivity: FlutterActivity() {
 
+
     private val CHANNEL = "skyflow"
 
     val config = Configuration(
@@ -26,16 +27,16 @@ class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
+
         // Register collect and reveal view factories
         flutterEngine
                 .platformViewsController
                 .registry
-                .registerViewFactory("android-text-field", AndridTextFieldFactory(skyflowClient))
+                .registerViewFactory("android-text-field", AndridTextFieldFactory(flutterEngine, skyflowClient))
         flutterEngine
                 .platformViewsController
                 .registry
-                .registerViewFactory("android-reveal-label", AndroidRevealLabelFactory(skyflowClient))
-        }
+                .registerViewFactory("android-reveal-label", AndroidRevealLabelFactory(flutterEngine, skyflowClient))
     }
 
 }

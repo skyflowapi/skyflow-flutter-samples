@@ -14,7 +14,7 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
-internal class AndroidTextField(context: Context, id: Int, client: Client, creationParams: Map<String?, Any?>?) :
+internal class AndroidTextField(context: Context, id: Int,  flutterEngine: FlutterEngine, client: Client, creationParams: Map<String?, Any?>?) :
         PlatformView {
     private val collectForm = LinearLayout(context);
 
@@ -42,7 +42,7 @@ internal class AndroidTextField(context: Context, id: Int, client: Client, creat
             collectForm.addView(textfield)
         }
 
-        MethodChannel(FlutterEngine(context).dartExecutor, CHANNEL).setMethodCallHandler{ call, result ->
+        MethodChannel(flutterEngine.dartExecutor, CHANNEL).setMethodCallHandler{ call, result ->
         if (call.method == "COLLECT") {
             Log.d("MC", "Collect has been called")
             this.collectContainer.collect(DemoCallback(result), CollectOptions())

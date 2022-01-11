@@ -4,18 +4,22 @@ import UIKit
 
 class TextFieldView: NSObject, FlutterPlatformView {
 
-    private var container: Container<CollectContainer>
+    private var collectContainer: Container<CollectContainer>
     private var args: Dictionary<String, String>?
+    private var viewId: Int64
+    private var messenger: FlutterBinaryMessenger
 
     init(
         frame: CGRect,
         viewIdentifier viewId: Int64,
         arguments params: Dictionary<String, String>,
         binaryMessenger messenger: FlutterBinaryMessenger?,
-        container: Container<CollectContainer>
+        client: Client
     ) {
-        self.container = container
+        self.collectContainer = client.container(type: ContainerType.COLLECT)!
         self.args = params
+        self.messenger = messenger!
+        self.viewId = viewId
 
 
         super.init()
@@ -47,8 +51,22 @@ class TextFieldView: NSObject, FlutterPlatformView {
         let styles = Styles(base: Style(cornerRadius: 2, padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), borderWidth: 1, textAlignment: .left, textColor: .blue))
 
         let collectInput = CollectElementInput(table: tablename, column: column, inputStyles: styles, label: label, type: elementType)
-        let textField = self.container.create(input: collectInput)
+        let textField = self.collectContainer.create(input: collectInput)
         textField.backgroundColor = .white
+        
+        
+        // set collect method call
+        FlutterMethodChannel(name: "skyflow-collect/\(self.viewId)", binaryMessenger: self.messenger)
+            .setMethodCallHandler({
+                (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
+                  if(call.method == "COLLECT") {
+                      self.collectContainer.collect(callback: DemoCallback(result))
+                  } else {
+                    result(FlutterMethodNotImplemented)
+                  }
+            })
+        
+        
         return textField
     }
 

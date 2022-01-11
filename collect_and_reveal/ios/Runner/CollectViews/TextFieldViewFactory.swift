@@ -4,11 +4,11 @@ import UIKit
 
 class TextFieldViewFactory: NSObject, FlutterPlatformViewFactory {
     private var messenger: FlutterBinaryMessenger
-    private var container: Container<CollectContainer>
+    private var client: Client
 
-    init(messenger: FlutterBinaryMessenger, container: Container<CollectContainer>) {
+    init(messenger: FlutterBinaryMessenger, client: Client) {
         self.messenger = messenger
-        self.container = container
+        self.client = client
         super.init()
     }
 
@@ -23,7 +23,7 @@ class TextFieldViewFactory: NSObject, FlutterPlatformViewFactory {
             viewIdentifier: viewId,
             arguments: params,
             binaryMessenger: messenger,
-            container: container)
+            client: client)
     }
     
     public func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {

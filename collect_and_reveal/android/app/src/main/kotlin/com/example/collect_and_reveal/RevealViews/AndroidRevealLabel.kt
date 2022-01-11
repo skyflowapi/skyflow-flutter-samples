@@ -14,7 +14,7 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
-internal class AndroidRevealLabel(context: Context, id: Int, client: Client, creationParams: Map<String?, Any?>?) :
+internal class AndroidRevealLabel(context: Context, id: Int, flutterEngine: FlutterEngine, client: Client, creationParams: Map<String?, Any?>?) :
         PlatformView {
     private val revealForm = LinearLayout(context)
     private val revealContainer = client.container(ContainerType.REVEAL)
@@ -41,8 +41,8 @@ internal class AndroidRevealLabel(context: Context, id: Int, client: Client, cre
             revealForm.addView(revealLabel)
         }
 
-        MethodChannel(FlutterEngine(context).dartExecutor, CHANNEL).setMethodCallHandler{ call, result ->
-            if (call.method == "COLLECT") {
+        MethodChannel(flutterEngine.dartExecutor, CHANNEL).setMethodCallHandler{ call, result ->
+            if (call.method == "REVEAL") {
                 Log.d("MC", "Reveal has been called")
                 this.revealContainer.reveal(DemoCallback(result), RevealOptions())
             } else {

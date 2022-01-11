@@ -27,8 +27,8 @@ import UIKit
         
 
         weak var registrar = self.registrar(forPlugin: "skyflow-ios")
-        let textFieldFactory = TextFieldViewFactory(messenger: registrar!.messenger(), container: collectContainer)
-        let revealLabelFactory = RevealLabelFactory(messenger: registrar!.messenger(), container: revealContainer, callback: addRevealView)
+        let textFieldFactory = TextFieldViewFactory(messenger: registrar!.messenger(), client: client)
+        let revealLabelFactory = RevealLabelFactory(messenger: registrar!.messenger(), client: client)
         
         // Register collect and reveal views
         self.registrar(forPlugin: "ios-skfylow")!.register(
@@ -48,21 +48,6 @@ import UIKit
                     self.collectContainer.collect(callback: DemoCallback(result))
                 } else if (call.method == "REVEAL") {
                     self.revealContainer.reveal(callback: DemoCallback(result))
-                } else if (call.method == "SETTOKEN") {
-                    guard let args = call.arguments else {
-                        result(FlutterError(code: "400", message: "Arguments `label` and `token` required", details: nil))
-                        return
-                    }
-                    if let dictArgs = args as? [String: Any],
-                       let label = dictArgs["label"] as? String,
-                       let token = dictArgs["token"] as? String{
-                        self.labelToViewMap[label]?.setToken(token)
-                        result("")
-                    } else {
-                        result(FlutterError(code: "400", message: "Bad arguments", details: nil))
-                    }
-                } else {
-                    result(FlutterMethodNotImplemented)
                 }
             })
 
@@ -73,29 +58,4 @@ import UIKit
 }
 
 
-class DemoTokenProvider: TokenProvider {
-    func getBearerToken(_ apiCallback: Callback) {
-        // Method to get bearer token for collect/reveal/invokeConnection
-    }
-    
-}
-
-class DemoCallback: Callback {
-    
-    private var resultCallback: FlutterResult
-    
-    init(_ callback: @escaping FlutterResult) {
-        self.resultCallback = callback
-    }
-    
-    func onSuccess(_ responseBody: Any) {
-        let strContent = String(data: try! JSONSerialization.data(withJSONObject: responseBody), encoding: .utf8)
-        self.resultCallback(strContent)
-    }
-    
-    func onFailure(_ error: Any) {
-        self.resultCallback("")
-    }
-    
-}
 

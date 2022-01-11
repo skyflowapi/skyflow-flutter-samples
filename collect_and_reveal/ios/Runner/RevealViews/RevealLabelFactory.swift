@@ -4,13 +4,11 @@ import UIKit
 
 class RevealLabelFactory: NSObject, FlutterPlatformViewFactory {
     private var messenger: FlutterBinaryMessenger
-    private var container: Container<RevealContainer>
-    private var callback: (String, RevealLabelView) -> Void
+    private var client: Client
 
-    init(messenger: FlutterBinaryMessenger, container: Container<RevealContainer>, callback: @escaping (String, RevealLabelView) -> Void) {
+    init(messenger: FlutterBinaryMessenger, client: Client) {
         self.messenger = messenger
-        self.container = container
-        self.callback = callback
+        self.client = client
         super.init()
     }
 
@@ -23,13 +21,10 @@ class RevealLabelFactory: NSObject, FlutterPlatformViewFactory {
         let labelView = RevealLabelView(
             frame: frame,
             viewIdentifier: viewId,
-            container: container,
+            client: client,
             arguments: dictArgs,
             binaryMessenger: messenger)
-        
-        // Add created Label to the Map
-        callback(dictArgs["label"]!, labelView)
-        
+                
         return labelView
     }
     

@@ -6,16 +6,19 @@ import io.flutter.Log
 import io.flutter.plugin.common.StandardMessageCodec
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
+import io.flutter.embedding.engine.FlutterEngine
 
-public class AndridTextFieldFactory(client: Client) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+public class AndridTextFieldFactory(flutterEngine: FlutterEngine, client: Client) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
     var client: Client
+    var flutterEngine: FlutterEngine
 
     init {
         this.client = client
+        this.flutterEngine = flutterEngine
     }
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
         val creationParams = args as Map<String?, Any?>?
-        return AndroidTextField(context, viewId, client, creationParams)
+        return AndroidTextField(context, viewId, flutterEngine, client, creationParams)
     }
 }
