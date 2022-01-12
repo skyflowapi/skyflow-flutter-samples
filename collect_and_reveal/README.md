@@ -10,9 +10,11 @@ This project can be run by following these steps
 ### Android
 
 - Add your `VAULT_ID` and `VAULT_URL` in Android's `MainActivity.kt` file
+- Add your tokenProvider code in Android's `utils/DemoTokenProvider.kt` file
 
 ### iOS
 - Add your `VAULT_ID` and `VAULT_URL` in `ios/Runner/ClientConfiguration.swift` file
+- Add you tokenProvider code in `ios/Runner/utils/DemoTokenProvider.kt`
 
 
 ### Dart
