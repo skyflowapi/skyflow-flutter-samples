@@ -1,16 +1,23 @@
 # connection_samples
 
-A new Flutter project.
+This Flutter demo illustrates the use of [Skyflow Connections]() with Flutter using the Android and iOS SDKs. The connection used for this demo is for [CVV2 Generation](https://developer.visa.com/capabilities/dps-card-and-account-services/docs-how-to-cvv2), although it can be modified to use any connection. You can find more about skyflow connections [here](https://www.skyflow.com/post/skyflow-connections-mission-critical-integrations-that-dont-break-privacy) and [here](https://docs.skyflow.com/developer-portal/connections/connections-overview/)
 
-## Getting Started
+## Steps to run
 
-This project is a starting point for a Flutter application.
+This project can be run by following these steps:
 
-A few resources to get you started if this is your first Flutter project:
+### For Android:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Add your `VAULT_ID` and `VAULT_URL` in `android/src/kotlin/MainActivity.kt` file
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+### For iOS:
+
+- Add your `VAULT_ID` and `VAULT_URL` in `ios/Runner/AppDelegate.swift` file
+
+
+### In Dart:
+
+- Change connection config in `lib/main.dart` inside the `generateCVV` function for your connection
+
+Finally, run the flutter program.
