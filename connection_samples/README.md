@@ -8,12 +8,14 @@ This project can be run by following these steps:
 
 ### For Android:
 
-- Add your `VAULT_ID` and `VAULT_URL` in `android/src/kotlin/MainActivity.kt` file
+- Add your `VAULT_ID` and `VAULT_URL` in Android's `MainActivity.kt` file
+- Add your tokenProvider code in Android's `MainActivity.kt` file
 
 
 ### For iOS:
 
 - Add your `VAULT_ID` and `VAULT_URL` in `ios/Runner/AppDelegate.swift` file
+- Add you tokenProvider code in `ios/Runner/AppDelegate.swift`
 
 
 ### In Dart:

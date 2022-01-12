@@ -31,10 +31,10 @@ import UIKit
         let revealLabelFactory = RevealLabelFactory(messenger: registrar!.messenger(), container: revealContainer, callback: addRevealView)
         
         // Register both collect and reveal views
-        self.registrar(forPlugin: "ios-skfylow")!.register(
+        self.registrar(forPlugin: "iOS-collect")!.register(
             textFieldFactory,
             withId: "iOS-text-field")
-        self.registrar(forPlugin: "skyflow_iOS")!.register(
+        self.registrar(forPlugin: "iOS-reveal")!.register(
             revealLabelFactory,
             withId: "iOS-reveal-label")
         
