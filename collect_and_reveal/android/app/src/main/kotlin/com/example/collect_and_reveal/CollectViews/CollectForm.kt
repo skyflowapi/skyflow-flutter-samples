@@ -14,7 +14,7 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
 
-internal class AndroidTextField(context: Context, id: Int,  flutterEngine: FlutterEngine, client: Client, creationParams: Map<String?, Any?>?) :
+internal class CollectForm(context: Context, id: Int, flutterEngine: FlutterEngine, client: Client, creationParams: Map<String?, Any?>?) :
         PlatformView {
     private val collectForm = LinearLayout(context);
 

@@ -10,7 +10,7 @@ import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import io.flutter.embedding.engine.FlutterEngine
 
-internal class AndroidRevealLabelFactory(flutterEngine: FlutterEngine, client: Client) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+internal class RevealFormFactory(flutterEngine: FlutterEngine, client: Client) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
     private var client: Client
     private var flutterEngine: FlutterEngine

@@ -2,7 +2,7 @@ import Flutter
 import Skyflow
 import UIKit
 
-class TextFieldViewFactory: NSObject, FlutterPlatformViewFactory {
+class CollectFormFactory: NSObject, FlutterPlatformViewFactory {
     private var messenger: FlutterBinaryMessenger
     private var client: Client
 
@@ -19,7 +19,7 @@ class TextFieldViewFactory: NSObject, FlutterPlatformViewFactory {
         arguments args: Any?
     ) -> FlutterPlatformView {
         let params = args as? Dictionary<String, Dictionary<String, [String]>> ?? [:]
-        return TextFieldView(
+        return CollectForm(
             frame: frame,
             viewIdentifier: viewId,
             arguments: params,

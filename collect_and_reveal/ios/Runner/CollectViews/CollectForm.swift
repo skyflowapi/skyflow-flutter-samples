@@ -2,7 +2,7 @@ import Flutter
 import Skyflow
 import UIKit
 
-class TextFieldView: NSObject, FlutterPlatformView {
+class CollectForm: NSObject, FlutterPlatformView {
 
     private var collectContainer: Container<CollectContainer>
     private var args: Dictionary<String, Dictionary<String, [String]>>?

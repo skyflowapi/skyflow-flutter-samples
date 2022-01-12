@@ -1,14 +1,11 @@
 package com.example.collect_and_reveal
 
-import Skyflow.*
-import com.example.collect_and_reveal.CollectViews.AndridTextFieldFactory
-import com.example.collect_and_reveal.RevealViews.AndroidRevealLabel
-import com.example.collect_and_reveal.RevealViews.AndroidRevealLabelFactory
+import Skyflow.Configuration
+import com.example.collect_and_reveal.CollectViews.CollectFormFactory
+import com.example.collect_and_reveal.RevealViews.RevealFormFactory
 import com.example.collect_and_reveal.utils.DemoTokenProvider
-import io.flutter.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.plugin.common.MethodChannel
 
 class MainActivity: FlutterActivity() {
 
@@ -32,11 +29,11 @@ class MainActivity: FlutterActivity() {
         flutterEngine
                 .platformViewsController
                 .registry
-                .registerViewFactory("android-text-field", AndridTextFieldFactory(flutterEngine, skyflowClient))
+                .registerViewFactory("android-text-field", CollectFormFactory(flutterEngine, skyflowClient))
         flutterEngine
                 .platformViewsController
                 .registry
-                .registerViewFactory("android-reveal-label", AndroidRevealLabelFactory(flutterEngine, skyflowClient))
+                .registerViewFactory("android-reveal-label", RevealFormFactory(flutterEngine, skyflowClient))
     }
 
 }

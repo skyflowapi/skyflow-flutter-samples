@@ -8,7 +8,7 @@ import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import io.flutter.embedding.engine.FlutterEngine
 
-public class AndridTextFieldFactory(flutterEngine: FlutterEngine, client: Client) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
+public class CollectFormFactory(flutterEngine: FlutterEngine, client: Client) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
     var client: Client
     var flutterEngine: FlutterEngine

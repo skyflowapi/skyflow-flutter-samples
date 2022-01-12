@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
-		3F74494D2786EFD2002D7DC5 /* TextFieldViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F74494C2786EFD2002D7DC5 /* TextFieldViewFactory.swift */; };
-		3F74494F2786EFF3002D7DC5 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F74494E2786EFF2002D7DC5 /* TextFieldView.swift */; };
-		3F7449522786F091002D7DC5 /* RevealLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7449512786F091002D7DC5 /* RevealLabelFactory.swift */; };
-		3F7449542786F099002D7DC5 /* RevealLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7449532786F099002D7DC5 /* RevealLabel.swift */; };
+		3F74494D2786EFD2002D7DC5 /* CollectFormFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F74494C2786EFD2002D7DC5 /* CollectFormFactory.swift */; };
+		3F74494F2786EFF3002D7DC5 /* CollectForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F74494E2786EFF2002D7DC5 /* CollectForm.swift */; };
+		3F7449522786F091002D7DC5 /* RevealFormFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7449512786F091002D7DC5 /* RevealFormFactory.swift */; };
+		3F7449542786F099002D7DC5 /* RevealForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7449532786F099002D7DC5 /* RevealForm.swift */; };
 		3FE53DF7278D3ED600C09851 /* DemoTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE53DF6278D3ED600C09851 /* DemoTokenProvider.swift */; };
 		3FE53DF9278D3EF900C09851 /* DemoCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE53DF8278D3EF900C09851 /* DemoCallback.swift */; };
+		3FE53DFB278D4D4500C09851 /* CollectPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE53DFA278D4D4500C09851 /* CollectPlugin.swift */; };
+		3FE53DFD278D514600C09851 /* RevealPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE53DFC278D514600C09851 /* RevealPlugin.swift */; };
+		3FE53DFF278D519A00C09851 /* ClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE53DFE278D519A00C09851 /* ClientConfiguration.swift */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
@@ -40,12 +43,15 @@
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		3CE38E4087C1F0EF872644A0 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
-		3F74494C2786EFD2002D7DC5 /* TextFieldViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewFactory.swift; sourceTree = "<group>"; };
-		3F74494E2786EFF2002D7DC5 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
-		3F7449512786F091002D7DC5 /* RevealLabelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealLabelFactory.swift; sourceTree = "<group>"; };
-		3F7449532786F099002D7DC5 /* RevealLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealLabel.swift; sourceTree = "<group>"; };
+		3F74494C2786EFD2002D7DC5 /* CollectFormFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectFormFactory.swift; sourceTree = "<group>"; };
+		3F74494E2786EFF2002D7DC5 /* CollectForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectForm.swift; sourceTree = "<group>"; };
+		3F7449512786F091002D7DC5 /* RevealFormFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealFormFactory.swift; sourceTree = "<group>"; };
+		3F7449532786F099002D7DC5 /* RevealForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealForm.swift; sourceTree = "<group>"; };
 		3FE53DF6278D3ED600C09851 /* DemoTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTokenProvider.swift; sourceTree = "<group>"; };
 		3FE53DF8278D3EF900C09851 /* DemoCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCallback.swift; sourceTree = "<group>"; };
+		3FE53DFA278D4D4500C09851 /* CollectPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectPlugin.swift; sourceTree = "<group>"; };
+		3FE53DFC278D514600C09851 /* RevealPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealPlugin.swift; sourceTree = "<group>"; };
+		3FE53DFE278D519A00C09851 /* ClientConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientConfiguration.swift; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
@@ -84,8 +90,9 @@
 		3F74494B2786EFBC002D7DC5 /* CollectViews */ = {
 			isa = PBXGroup;
 			children = (
-				3F74494C2786EFD2002D7DC5 /* TextFieldViewFactory.swift */,
-				3F74494E2786EFF2002D7DC5 /* TextFieldView.swift */,
+				3F74494C2786EFD2002D7DC5 /* CollectFormFactory.swift */,
+				3F74494E2786EFF2002D7DC5 /* CollectForm.swift */,
+				3FE53DFA278D4D4500C09851 /* CollectPlugin.swift */,
 			);
 			path = CollectViews;
 			sourceTree = "<group>";
@@ -93,8 +100,9 @@
 		3F7449502786F07C002D7DC5 /* RevealViews */ = {
 			isa = PBXGroup;
 			children = (
-				3F7449512786F091002D7DC5 /* RevealLabelFactory.swift */,
-				3F7449532786F099002D7DC5 /* RevealLabel.swift */,
+				3F7449512786F091002D7DC5 /* RevealFormFactory.swift */,
+				3F7449532786F099002D7DC5 /* RevealForm.swift */,
+				3FE53DFC278D514600C09851 /* RevealPlugin.swift */,
 			);
 			path = RevealViews;
 			sourceTree = "<group>";
@@ -162,6 +170,7 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				3FE53DFE278D519A00C09851 /* ClientConfiguration.swift */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -313,13 +322,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FE53DFB278D4D4500C09851 /* CollectPlugin.swift in Sources */,
 				3FE53DF7278D3ED600C09851 /* DemoTokenProvider.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
-				3F74494D2786EFD2002D7DC5 /* TextFieldViewFactory.swift in Sources */,
-				3F74494F2786EFF3002D7DC5 /* TextFieldView.swift in Sources */,
-				3F7449522786F091002D7DC5 /* RevealLabelFactory.swift in Sources */,
+				3FE53DFD278D514600C09851 /* RevealPlugin.swift in Sources */,
+				3F74494D2786EFD2002D7DC5 /* CollectFormFactory.swift in Sources */,
+				3F74494F2786EFF3002D7DC5 /* CollectForm.swift in Sources */,
+				3F7449522786F091002D7DC5 /* RevealFormFactory.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
-				3F7449542786F099002D7DC5 /* RevealLabel.swift in Sources */,
+				3F7449542786F099002D7DC5 /* RevealForm.swift in Sources */,
+				3FE53DFF278D519A00C09851 /* ClientConfiguration.swift in Sources */,
 				3FE53DF9278D3EF900C09851 /* DemoCallback.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

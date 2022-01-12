@@ -152,6 +152,7 @@ class _CollectFormState extends State<CollectForm> {
     UiKitView(
       viewType: viewType,
       layoutDirection: TextDirection.ltr,
+      onPlatformViewCreated: setCollectChannel,
       creationParams: {"fields": collectFormDetails},
       creationParamsCodec: const StandardMessageCodec(),
     )
