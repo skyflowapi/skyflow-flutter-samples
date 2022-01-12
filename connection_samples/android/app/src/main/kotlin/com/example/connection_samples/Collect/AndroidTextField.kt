@@ -28,12 +28,57 @@ internal class AndroidTextField(context: Context, id: Int, container: Skyflow.Co
                 table = table,
                 column = column,
                 type = getElementType(type),
-                label = label
+                label = label,
+                inputStyles = getDefaultStyles()
         )
         textView = container.create(context, textFieldInput, CollectElementOptions())
         textView.setBackgroundColor(Color.rgb(255, 255, 255))
 
     }
+
+    private fun getDefaultStyles() : Styles {
+        val padding = Padding(8, 8, 8, 8)
+        val base = Style(
+                Color.BLACK
+                10f,
+                padding,
+                1,
+                R.font.roboto_light,
+                Gravity.START,
+                Color.BLUE
+        )
+        val complete = Style(
+                Color.GREEN,
+                10f,
+                padding,
+                1,
+                R.font.roboto_light,
+                Gravity.END,
+                Color.GREEN
+        )
+        val focus = Style(
+                Color.BLACK,
+                10f,
+                padding,
+                1,
+                R.font.roboto_light,
+                Gravity.START,
+                Color.GREEN
+        )
+        val empty = Style(
+                Color.YELLOW,
+                10f,
+                padding,
+                1,
+                R.font.roboto_light,
+                Gravity.CENTER,
+                Color.YELLOW
+        )
+        val invalid =
+                Style(Color.RED, 10f, padding, 1, R.font.roboto_light, Gravity.START, Color.RED)
+        return Styles(base, complete, error, focus, invalid)
+    }
+
 
     private fun getElementType(type: String): SkyflowElementType {
         if(type == "CARD_NUMBER") {

@@ -21,11 +21,35 @@ internal class AndroidRevealLabel(context: Context, container: Container<RevealC
         val token = creationParams?.get("token") as String
         val labelInput = RevealElementInput(
                 token = token,
-                label = label
+                label = label,
+                inputStyles = getDefaultStyles()
         )
 
         revealLabel = container.create(context, labelInput, RevealElementOptions())
         revealLabel.setBackgroundColor(Color.rgb(255, 255, 255))
+    }
+
+    private fun getDefaultStyles() : Styles {
+        val padding = Padding(8, 8, 8, 8)
+        val base = Style(
+                Color.BLACK
+                1f,
+                padding,
+                4,
+                R.font.roboto_light,
+                Gravity.START,
+                Color.BLUE
+        )
+
+        val invalid = Style(
+                Color.RED,
+                1f,
+                padding,
+                1,
+                R.font.roboto_light,
+                Gravity.START,
+                Color.RED)
+        return Styles(base, null, null, null, invalid)
     }
 
     internal fun setToken(token: String) {

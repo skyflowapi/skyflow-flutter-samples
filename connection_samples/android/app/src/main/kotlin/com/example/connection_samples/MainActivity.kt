@@ -43,7 +43,6 @@ class MainActivity: FlutterActivity() {
         // TODO: Add method call for generate cvv
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "GENERATECVV") {
-                Log.d("MC", call.arguments.toString())
                 Log.d("MC", "Generate CVV called")
                 val requestBody = call.argument<Map<String, Any>>("requestBody")
 
@@ -51,8 +50,8 @@ class MainActivity: FlutterActivity() {
                 val responseBody = call.argument<Map<String, Any>>("responseBody")
                 if (requestBody != null && responseBody != null) {
                     // Gather all required params from flutter end
-                    val body = convertBody(requestBody)
-                    val convertedResponseBody = convertBody(responseBody)
+                    val body = JSONObject(convertBody(requestBody) as Map<*, *>?)
+                    val convertedResponseBody = JSONObject(convertBody(responseBody) as Map<*, *>?)
                     val connectionUrl = call.argument<String>("connectionUrl")!!
 
                     val headerArg = call.argument<Map<String, Any>>("requestHeader")
@@ -71,7 +70,6 @@ class MainActivity: FlutterActivity() {
                             queryParams = queryParams,
                             responseBody = convertedResponseBody)
 
-                    Log.d("MC", convertedResponseBody.toString())
                     skyflowClient.invokeConnection(connectionConfig, DemoCallback(result))
                 }
             } else {
@@ -85,18 +83,20 @@ class MainActivity: FlutterActivity() {
         labelToViewMap.put(label, view)
     }
 
-    private fun convertBody(requestBody: Map<String, Any>): JSONObject {
+    private fun convertBody(requestBody: Map<String, Any>): Map<String, Any> {
         var convertedRequestBody = HashMap<String, Any>()
         // Check if request body contains UI element
         for((key, value) in requestBody) {
             if(value is String && labelToViewMap.containsKey(value)) {
                 convertedRequestBody[key] = labelToViewMap.get(value)!!
+            } else if (value is Map<*, *>) {
+                convertedRequestBody[key] = convertBody(value as Map<String, Any>)
             } else {
                 convertedRequestBody[key] = value
             }
         }
 
-        return JSONObject(convertedRequestBody as Map<*, *>?);
+        return convertedRequestBody;
     }
 
 }
