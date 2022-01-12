@@ -72,8 +72,8 @@ allprojects {
             url "https://maven.pkg.github.com/skyflowapi/skyflow-android-sdk"
             credentials
                     {
-                        username = "skyflow-tejesh-reddy"
-                        password = "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"
+                        username = localProperties.getProperty('github.username')
+                        password = localProperties.getProperty('github.PAT')
                     }
         }
     }
