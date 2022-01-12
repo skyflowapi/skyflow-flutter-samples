@@ -36,7 +36,25 @@ internal class AndroidTextField(context: Context, id: Int, container: Skyflow.Co
 
     }
 
-    private fun getDefaultStyles() : Styles {
+
+    private fun getElementType(type: String): SkyflowElementType {
+        if(type == "CARD_NUMBER") {
+            return SkyflowElementType.CARD_NUMBER
+        } else if (type.equals("CARDHOLDER_NAME")) {
+            return SkyflowElementType.CARDHOLDER_NAME
+        } else if(type.equals("CVV")) {
+            return SkyflowElementType.CVV
+        } else if(type.equals("EXPIRATION_DATE")) {
+            return SkyflowElementType.EXPIRATION_DATE
+        } else if(type.equals("PIN")) {
+            return SkyflowElementType.PIN;
+        } else {
+            return SkyflowElementType.INPUT_FIELD
+        }
+    }
+}
+        
+private fun getDefaultStyles() : Styles {
         val padding = Padding(8, 8, 8, 8)
         val base = Style(
                 Color.BLACK
@@ -74,25 +92,6 @@ internal class AndroidTextField(context: Context, id: Int, container: Skyflow.Co
                 Gravity.CENTER,
                 Color.YELLOW
         )
-        val invalid =
-                Style(Color.RED, 10f, padding, 1, R.font.roboto_light, Gravity.START, Color.RED)
+        val invalid = Style(Color.RED, 10f, padding, 1, R.font.roboto_light, Gravity.START, Color.RED)
         return Styles(base, complete, error, focus, invalid)
-    }
-
-
-    private fun getElementType(type: String): SkyflowElementType {
-        if(type == "CARD_NUMBER") {
-            return SkyflowElementType.CARD_NUMBER
-        } else if (type.equals("CARDHOLDER_NAME")) {
-            return SkyflowElementType.CARDHOLDER_NAME
-        } else if(type.equals("CVV")) {
-            return SkyflowElementType.CVV
-        } else if(type.equals("EXPIRATION_DATE")) {
-            return SkyflowElementType.EXPIRATION_DATE
-        } else if(type.equals("PIN")) {
-            return SkyflowElementType.PIN;
-        } else {
-            return SkyflowElementType.INPUT_FIELD
-        }
-    }
 }
