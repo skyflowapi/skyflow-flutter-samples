@@ -35,6 +35,7 @@ internal class RevealForm(context: Context, id: Int, flutterEngine: FlutterEngin
         for((label, token) in fields) {
             val labelInput = RevealElementInput(
                     token = token,
+                    inputStyles = getDefaultStyles(),
                     label = label
             )
             val revealLabel = revealContainer.create(context, labelInput, RevealElementOptions())
@@ -53,3 +54,27 @@ internal class RevealForm(context: Context, id: Int, flutterEngine: FlutterEngin
     }
 
 }
+
+fun getDefaultStyles() : Styles {
+    val padding = Padding(8, 8, 8, 8)
+    val base = Style(
+            Color.BLACK
+            1f,
+            padding,
+            4,
+            R.font.roboto_light,
+            Gravity.START,
+            Color.BLUE
+    )
+
+    val invalid = Style(
+            Color.RED,
+            1f,
+            padding,
+            1,
+            R.font.roboto_light,
+            Gravity.START,
+            Color.RED)
+    return Styles(base, null, null, null, invalid)
+}
+

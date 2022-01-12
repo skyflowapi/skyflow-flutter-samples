@@ -31,7 +31,7 @@ class RevealForm: NSObject, FlutterPlatformView {
         
         if let fields = args["fields"] as? [String: String] {
             for (label, token) in fields {
-                let revealLabel = self.revealContainer.create(input: RevealElementInput(token: token, label: label))
+                let revealLabel = self.revealContainer.create(input: RevealElementInput(token: token, inputStyles: RevealForm.getDefaultStyles(), label: label))
                 stackView.addArrangedSubview(revealLabel)
             }
 
@@ -43,6 +43,23 @@ class RevealForm: NSObject, FlutterPlatformView {
 
         super.init()
     }
+    
+    class func getDefaultStyles() -> Styles {
+            let padding = UIEdgeInsets(top: 15, left: 12, bottom: 15, right: 5)
+            let base = Style(
+                borderColor: UIColor.blue,
+                cornerRadius: 1,
+                padding: padding,
+                borderWidth: 3,
+                textColor: UIColor.black)
+            let error = Style(
+                borderColor: UIColor.red,
+                cornerRadius: 1,
+                padding: padding,
+                borderWidth: 3,
+                textColor: UIColor.red)
+            return Styles(base: base, invalid: error)
+        }
 
 
     func view() -> UIView {

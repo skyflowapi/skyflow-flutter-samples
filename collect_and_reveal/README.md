@@ -1,16 +1,19 @@
-# collect_and_reveal
+# Collect And Reveal
 
-A new Flutter project.
+This Flutter demo illustrates the use of Skyflow Collect and Reveal with Flutter using the Android and iOS SDKs
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Steps to run
 
-A few resources to get you started if this is your first Flutter project:
+This project can be run by following these steps
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Android
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Add your `VAULT_ID` and `VAULT_URL` in Android's `MainActivity.kt` file
+
+### iOS
+- Add your `VAULT_ID` and `VAULT_URL` in `ios/Runner/ClientConfiguration.swift` file
+
+
+### Dart
+- You can change the Label, tablename, column and type of Collect and Reveal UI elements in `CollectForm` and `RevealForm` Widgets

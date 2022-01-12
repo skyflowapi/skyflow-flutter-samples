@@ -35,7 +35,8 @@ internal class CollectForm(context: Context, id: Int, flutterEngine: FlutterEngi
                     table=values[0],
                     column=values[1],
                     label=label,
-                    type=getElementType(values[2])
+                    type=getElementType(values[2]),
+                    inputStyles = getDefaultStyles()
             )
 
             val textfield = collectContainer.create(context, collectInput, options = CollectElementOptions(format="mm/yy"))
@@ -69,4 +70,46 @@ internal class CollectForm(context: Context, id: Int, flutterEngine: FlutterEngi
             return SkyflowElementType.INPUT_FIELD
         }
     }
+}
+
+private fun getDefaultStyles() : Styles {
+    val padding = Padding(8, 8, 8, 8)
+    val base = Style(
+            Color.BLACK
+            10f,
+            padding,
+            1,
+            R.font.roboto_light,
+            Gravity.START,
+            Color.BLUE
+    )
+    val complete = Style(
+            Color.GREEN,
+            10f,
+            padding,
+            1,
+            R.font.roboto_light,
+            Gravity.END,
+            Color.GREEN
+    )
+    val focus = Style(
+            Color.BLACK,
+            10f,
+            padding,
+            1,
+            R.font.roboto_light,
+            Gravity.START,
+            Color.GREEN
+    )
+    val empty = Style(
+            Color.YELLOW,
+            10f,
+            padding,
+            1,
+            R.font.roboto_light,
+            Gravity.CENTER,
+            Color.YELLOW
+    )
+    val invalid = Style(Color.RED, 10f, padding, 1, R.font.roboto_light, Gravity.START, Color.RED)
+    return Styles(base, complete, error, focus, invalid)
 }

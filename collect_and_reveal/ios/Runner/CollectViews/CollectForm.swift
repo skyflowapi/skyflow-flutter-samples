@@ -24,6 +24,35 @@ class CollectForm: NSObject, FlutterPlatformView {
 
         super.init()
     }
+    
+    class func getDefaultStyles() -> Styles {
+        let padding = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        let base = Style(
+            borderColor: UIColor.black,
+            cornerRadius: 10,
+            padding: padding,
+            borderWidth: 1,
+            textColor: UIColor.blue)
+        let complete = Style(
+            borderColor: UIColor.green,
+            cornerRadius: 10,
+            padding: padding,
+            borderWidth: 2,
+            textColor: UIColor.green)
+        let focus = Style(
+            borderColor: UIColor.blue,
+            cornerRadius: 10,
+            padding: padding,
+            borderWidth: 2,
+            textColor: UIColor.blue)
+        let error = Style(
+            borderColor: UIColor.red,
+            cornerRadius: 10,
+            padding: padding,
+            borderWidth: 2,
+            textColor: UIColor.red)
+        return Styles(base: base, complete:complete, focus:focus, invalid: error)
+    }
 
     func getElementType(_ type: String) -> ElementType {
         switch type.uppercased() {
@@ -54,7 +83,7 @@ class CollectForm: NSObject, FlutterPlatformView {
         stackView.leftAnchor.constraint(equalTo: collectForm.leftAnchor).isActive = true
         stackView.rightAnchor.constraint(equalTo: collectForm.rightAnchor).isActive = true
         
-        let styles = Styles(base: Style(cornerRadius: 2, padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), borderWidth: 1, textAlignment: .left, textColor: .blue))
+        let styles = CollectForm.getDefaultStyles()
 
         if let fields = args!["fields"] {
             for (label, field) in fields {
