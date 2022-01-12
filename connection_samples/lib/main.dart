@@ -1,9 +1,6 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'NativeViews.dart';
 
@@ -40,11 +37,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> creationParams = <String, dynamic>{};
 
     List<Widget> fields = [
-      Text('Connection generates a CVV'),
-      GetNativeTextField("CVV", "pii_fields", "primary_card.cvv", "CVV"),
+      GetNativeTextField("CARD NUMBER", "pii_fields", "primary_card.card_number", "CARD_NUMBER"),
+      GetNativeTextField("EXPIRATION DATE", "pii_fields", "primary_card.expiry_date", "EXPIRY_DATE"),
+      GetNativeRevealLabel("CVV", ""),
       ElevatedButton(
           onPressed: generateCVV,
           child: const Text("Generate CVV"))];
@@ -65,29 +62,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   void generateCVV() async {
-    log("calling invokeConnection");
 
     Map<String, dynamic> args = {
-      "connectionUrl": "https://na1.area51.gateway.skyflowapis.com/v1/gateway/outboundRoutes/scfaffe01789470a81d977804637fa7e/dcas/cardservices/v1/cards/{card_number}/cvv2generation",
+      "connectionUrl": "<YOUR_CONNECTION_URL>",
       "requestHeaders": {
         "Content-Type": "application/json",
-        "Authorization": "Basic QjBORFNKUEcyMzhTMjJOSlU5QjIyMVJfQTBMT3ZLZE1xS3JRQTJOQXpBXzFQQVIyRTozZ0Z3NlNmMUU5VDMxeWo2a3FQMzJmY1VBOU4weUQ5WjlDbA"
+        "Authorization": "<YOUR_VISA_BASIC_AUTH"
       },
       "requestBody": {
-        "expirationDate": {
-          "mm": "12",
-          "yy": "22"
-        }
+        // Get the expiration date from the "EXPIRATION DATE" collect element
+        "expirationDate": "EXPIRATION DATE"
       },
       "pathParams": {
-        "card_number": "4111111111111111"
+        // Get the card number from the "CARD NUMBER" collect element
+        "card_number": "CARD NUMBER"
       },
       "queryParams": {},
       "responseBody": {
-        // "resource": {
-        //   // Should show up on this element
-        //   "cvv": "CVV"
-        // }
+        // Generated CVV shows up on CVV reveal element
+        "cvv2": "CVV"
       }
     };
 
