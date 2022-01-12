@@ -2,13 +2,14 @@ import Flutter
 import Skyflow
 import UIKit
 
-class RevealLabelFactory: NSObject, FlutterPlatformViewFactory {
+class TextFieldViewFactory: NSObject, FlutterPlatformViewFactory {
     private var messenger: FlutterBinaryMessenger
     private var client: Client
 
-    init(messenger: FlutterBinaryMessenger, client: Client) {
+    init(messenger: FlutterBinaryMessenger) {
         self.messenger = messenger
-        self.client = client
+        
+        self.client  = Client(ClientConfiguration().config)
         super.init()
     }
 
@@ -17,21 +18,16 @@ class RevealLabelFactory: NSObject, FlutterPlatformViewFactory {
         viewIdentifier viewId: Int64,
         arguments args: Any?
     ) -> FlutterPlatformView {
-        let dictArgs = args as! Dictionary<String, String>
-        let labelView = RevealLabelView(
+        let params = args as? Dictionary<String, Dictionary<String, [String]>> ?? [:]
+        return TextFieldView(
             frame: frame,
             viewIdentifier: viewId,
-            client: client,
-            arguments: dictArgs,
-            binaryMessenger: messenger)
-                
-        return labelView
+            arguments: params,
+            binaryMessenger: messenger,
+            client: client)
     }
     
     public func createArgsCodec() -> FlutterMessageCodec & NSObjectProtocol {
             return FlutterStandardMessageCodec(readerWriter: FlutterStandardReaderWriter())
     }
 }
-
-
-

@@ -5,14 +5,14 @@ import UIKit
 class TextFieldView: NSObject, FlutterPlatformView {
 
     private var collectContainer: Container<CollectContainer>
-    private var args: Dictionary<String, String>?
+    private var args: Dictionary<String, Dictionary<String, [String]>>?
     private var viewId: Int64
     private var messenger: FlutterBinaryMessenger
 
     init(
         frame: CGRect,
         viewIdentifier viewId: Int64,
-        arguments params: Dictionary<String, String>,
+        arguments params: Dictionary<String, Dictionary<String, [String]>>,
         binaryMessenger messenger: FlutterBinaryMessenger?,
         client: Client
     ) {
@@ -43,16 +43,34 @@ class TextFieldView: NSObject, FlutterPlatformView {
     }
 
     func view() -> UIView {
-        let tablename = args?["table"] ?? ""
-        let column = args?["column"] ?? ""
-        let label = args?["label"] ?? "default"
-        let elementType = getElementType(args?["type"] ?? "")
-
+        let collectForm = UIView()
+        let stackView = UIStackView()
+        
+        collectForm.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        
+        stackView.topAnchor.constraint(equalTo: collectForm.topAnchor, constant: 10).isActive = true
+        stackView.leftAnchor.constraint(equalTo: collectForm.leftAnchor).isActive = true
+        stackView.rightAnchor.constraint(equalTo: collectForm.rightAnchor).isActive = true
+        
         let styles = Styles(base: Style(cornerRadius: 2, padding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), borderWidth: 1, textAlignment: .left, textColor: .blue))
 
-        let collectInput = CollectElementInput(table: tablename, column: column, inputStyles: styles, label: label, type: elementType)
-        let textField = self.collectContainer.create(input: collectInput)
-        textField.backgroundColor = .white
+        if let fields = args!["fields"] {
+            for (label, field) in fields {
+                let label = label
+                let tablename = field[0]
+                let column = field[1]
+                let elementType = getElementType(field[2])
+
+        
+                let collectInput = CollectElementInput(table: tablename, column: column, inputStyles: styles, label: label, type: elementType)
+                let textField = self.collectContainer.create(input: collectInput)
+                textField.backgroundColor = .white
+                
+                stackView.addArrangedSubview(textField)
+            }
+        }
         
         
         // set collect method call
@@ -67,7 +85,7 @@ class TextFieldView: NSObject, FlutterPlatformView {
             })
         
         
-        return textField
+        return collectForm
     }
 
 }

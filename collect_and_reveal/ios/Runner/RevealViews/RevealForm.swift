@@ -2,9 +2,9 @@ import Flutter
 import Skyflow
 import UIKit
 
-class RevealLabelView: NSObject, FlutterPlatformView {
+class RevealForm: NSObject, FlutterPlatformView {
     private var revealContainer: Container<RevealContainer>
-    private var revealLabel: Label
+    private var revealForm: UIView
     private var args: Dictionary<String, String>?
     private var viewId: Int64
     private var messenger: FlutterBinaryMessenger
@@ -13,16 +13,31 @@ class RevealLabelView: NSObject, FlutterPlatformView {
         frame: CGRect,
         viewIdentifier viewId: Int64,
         client: Client,
-        arguments args: Dictionary<String, String>,
+        arguments args: Dictionary<String, Any>,
         binaryMessenger messenger: FlutterBinaryMessenger?
     ) {
         self.revealContainer = client.container(type: ContainerType.REVEAL)!
         
-        let token = args["token"]!
-        let label = args["label"]!
+        
+        self.revealForm = UIView()
+        let stackView = UIStackView()
+        revealForm.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        
+        stackView.topAnchor.constraint(equalTo: revealForm.topAnchor, constant: 10).isActive = true
+        stackView.leftAnchor.constraint(equalTo: revealForm.leftAnchor).isActive = true
+        stackView.rightAnchor.constraint(equalTo: revealForm.rightAnchor).isActive = true
+        
+        if let fields = args["fields"] as? [String: String] {
+            for (label, token) in fields {
+                let revealLabel = self.revealContainer.create(input: RevealElementInput(token: token, label: label))
+                stackView.addArrangedSubview(revealLabel)
+            }
 
-        let revealInput = RevealElementInput(token: token, label: label)
-        self.revealLabel = self.revealContainer.create(input: revealInput)
+        }
+
+        
         self.viewId = viewId
         self.messenger = messenger!
 
@@ -31,7 +46,6 @@ class RevealLabelView: NSObject, FlutterPlatformView {
 
 
     func view() -> UIView {
-        
         FlutterMethodChannel(name: "skyflow-reveal/\(self.viewId)", binaryMessenger: self.messenger)
             .setMethodCallHandler({
                 (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
@@ -42,7 +56,7 @@ class RevealLabelView: NSObject, FlutterPlatformView {
                   }
             })
         
-        return self.revealLabel
+        return self.revealForm
     }
 }
 
