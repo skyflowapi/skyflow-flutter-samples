@@ -1,2 +1,16 @@
-# skyflow-flutter-samples
-A repo containing sample flutter apps to demonstrate the usage of the Skyflow Android and iOS SDKs
+# Flutter integration with Skyflow Android/iOS SDK
+Currently, Skyflow does not have a dedicated Flutter SDK, so this repo contains examples of how to integrate Skyflow's Android and iOS SDKs with Flutter.
+
+### Basic Requirements
+- Installed <a href="https://flutter.dev/docs/get-started/install" target="_blank">Flutter</a>
+- Setup <a href="https://flutter.dev/docs/get-started/editor?tab=androidstudio" target="_blank">Android Studio</a>
+- Setup <a href="https://flutter.dev/docs/get-started/install/macos#install-xcode" target="_blank">Xcode</a>
+- Install both Skyflow Android and iOS SDKs (see below)
+
+### Installing Skyflow SDKs
+- <a href = "https://github.com/skyflowapi/skyflow-android#installing-skyflow-android" target="_blank">Skyflow Android</a>
+- <a href="https://github.com/skyflowapi/skyflow-iOS#installing-skyflow-ios" target="_blank">Skyflow iOS SDK</a>
+
+### Steps to run samples
+- <a href="#" target="_blank">Collect and Reveal Sample</a>
+- <a href="#" target="_blank">Connections Sample</a>
