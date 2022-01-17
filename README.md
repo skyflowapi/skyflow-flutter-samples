@@ -9,7 +9,7 @@ Currently, Skyflow does not have a dedicated Flutter SDK, so this repo contains 
 
 ### Installing Skyflow SDKs
 - <a href = "https://github.com/skyflowapi/skyflow-android#installing-skyflow-android" target="_blank">Skyflow Android</a>
-- <a href="https://github.com/skyflowapi/skyflow-iOS#installing-skyflow-ios" target="_blank">Skyflow iOS SDK</a>
+- <a href="https://github.com/skyflowapi/skyflow-iOS#installing-skyflow-ios" target="_blank">Skyflow iOS</a>
 
 
 The steps to run each sample is present inside the respective sample directory.
