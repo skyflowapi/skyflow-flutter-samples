@@ -1,12 +1,11 @@
 package com.example.connection_samples.Collect
 
-import Skyflow.CollectContainer
-import Skyflow.CollectElementOptions
-import Skyflow.SkyflowElementType
-import Skyflow.create
+import Skyflow.*
 import android.content.Context
 import android.graphics.Color
+import android.view.Gravity
 import android.view.View
+import com.example.connection_samples.R
 import io.flutter.plugin.platform.PlatformView
 
 internal class AndroidTextField(context: Context, id: Int, container: Skyflow.Container<CollectContainer>, creationParams: Map<String?, Any?>?) :
@@ -57,7 +56,7 @@ internal class AndroidTextField(context: Context, id: Int, container: Skyflow.Co
 private fun getDefaultStyles() : Styles {
         val padding = Padding(8, 8, 8, 8)
         val base = Style(
-                Color.BLACK
+                Color.BLACK,
                 10f,
                 padding,
                 1,
@@ -93,5 +92,5 @@ private fun getDefaultStyles() : Styles {
                 Color.YELLOW
         )
         val invalid = Style(Color.RED, 10f, padding, 1, R.font.roboto_light, Gravity.START, Color.RED)
-        return Styles(base, complete, error, focus, invalid)
+        return Styles(base, complete, empty, focus, invalid)
 }

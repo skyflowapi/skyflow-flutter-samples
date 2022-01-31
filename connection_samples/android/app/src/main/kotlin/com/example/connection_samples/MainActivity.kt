@@ -50,8 +50,8 @@ class MainActivity: FlutterActivity() {
                 val responseBody = call.argument<Map<String, Any>>("responseBody")
                 if (requestBody != null && responseBody != null) {
                     // Gather all required params from flutter end
-                    val body = JSONObject(convertBody(requestBody) as Map<*, *>?)
-                    val convertedResponseBody = JSONObject(convertBody(responseBody) as Map<*, *>?)
+                    val body = convertBody(requestBody)
+                    val convertedResponseBody = convertBody(responseBody)
                     val connectionUrl = call.argument<String>("connectionUrl")!!
 
                     val headerArg = call.argument<Map<String, Any>>("requestHeader")
@@ -69,7 +69,6 @@ class MainActivity: FlutterActivity() {
                             pathParams = pathParams,
                             queryParams = queryParams,
                             responseBody = convertedResponseBody)
-
                     skyflowClient.invokeConnection(connectionConfig, DemoCallback(result))
                 }
             } else {
@@ -83,16 +82,18 @@ class MainActivity: FlutterActivity() {
         labelToViewMap.put(label, view)
     }
 
-    private fun convertBody(requestBody: Map<String, Any>): Map<String, Any> {
-        var convertedRequestBody = HashMap<String, Any>()
+    private fun convertBody(requestBody: Map<String, Any>): JSONObject {
+        val convertedRequestBody = JSONObject()
         // Check if request body contains UI element
         for((key, value) in requestBody) {
             if(value is String && labelToViewMap.containsKey(value)) {
-                convertedRequestBody[key] = labelToViewMap.get(value)!!
+                convertedRequestBody.put(key , labelToViewMap.get(value)!!.view)
             } else if (value is Map<*, *>) {
-                convertedRequestBody[key] = convertBody(value as Map<String, Any>)
+                Log.d("here",value.toString())
+                Log.d("here1",convertBody(value as Map<String, Any>).toString())
+                convertedRequestBody.put(key ,convertBody(value as Map<String, Any>))
             } else {
-                convertedRequestBody[key] = value
+                convertedRequestBody.put(key , value)
             }
         }
 
@@ -118,10 +119,12 @@ private class DemoCallback(result: MethodChannel.Result): Callback {
     }
 
     override fun onFailure(exception: Any) {
+        Log.d("error",exception.toString())
         result.error("500", "Operation Failed", null)
     }
 
     override fun onSuccess(responseBody: Any) {
+        Log.d("success",responseBody.toString())
         result.success(responseBody.toString())
     }
 

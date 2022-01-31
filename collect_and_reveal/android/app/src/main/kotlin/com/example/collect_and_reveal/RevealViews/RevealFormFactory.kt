@@ -21,7 +21,7 @@ internal class RevealFormFactory(flutterEngine: FlutterEngine, client: Client) :
     }
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
         val creationParams = args as Map<String?, Any?>?
-        val revealLabel =  AndroidRevealLabel(context, viewId, flutterEngine, client, creationParams)
+        val revealLabel =  RevealForm(context, viewId, flutterEngine, client, creationParams)
 
 
         return revealLabel
