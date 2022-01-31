@@ -3,7 +3,9 @@ package com.example.connection_samples.Reveal
 import Skyflow.*
 import android.content.Context
 import android.graphics.Color
+import android.view.Gravity
 import android.view.View
+import com.example.connection_samples.R
 import io.flutter.plugin.platform.PlatformView
 
 internal class AndroidRevealLabel(context: Context, container: Container<RevealContainer>, creationParams: Map<String?, Any?>?) :
@@ -17,8 +19,8 @@ internal class AndroidRevealLabel(context: Context, container: Container<RevealC
     override fun dispose() {}
 
     init {
-        val label = creationParams?.get("label") as String
-        val token = creationParams?.get("token") as String
+        val label = creationParams!!.get("label") as String
+        val token = creationParams.get("token") as String
         val labelInput = RevealElementInput(
                 token = token,
                 label = label,
@@ -33,12 +35,12 @@ internal class AndroidRevealLabel(context: Context, container: Container<RevealC
 private fun getDefaultStyles() : Styles {
         val padding = Padding(8, 8, 8, 8)
         val base = Style(
-        Color.BLACK
+        Color.BLACK,
         1f,
         padding,
         4,
-        R.font.roboto_light,
-        Gravity.START,
+            R.font.roboto_light,
+            Gravity.START,
         Color.BLUE
         )
 
@@ -47,7 +49,7 @@ private fun getDefaultStyles() : Styles {
         1f,
         padding,
         1,
-        R.font.roboto_light,
+            R.font.roboto_light,
         Gravity.START,
         Color.RED)
         return Styles(base, null, null, null, invalid)

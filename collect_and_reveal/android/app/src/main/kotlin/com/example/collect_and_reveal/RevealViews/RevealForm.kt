@@ -1,13 +1,12 @@
 package com.example.collect_and_reveal.RevealViews
 
 import Skyflow.*
-import Skyflow.utils.EventName
 import android.content.Context
 import android.graphics.Color
+import android.view.Gravity
 import android.view.View
-import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.TextView
+import com.example.collect_and_reveal.R
 import com.example.collect_and_reveal.utils.DemoCallback
 import io.flutter.Log
 import io.flutter.embedding.engine.FlutterEngine
@@ -58,7 +57,7 @@ internal class RevealForm(context: Context, id: Int, flutterEngine: FlutterEngin
 fun getDefaultStyles() : Styles {
     val padding = Padding(8, 8, 8, 8)
     val base = Style(
-            Color.BLACK
+            Color.BLACK,
             1f,
             padding,
             4,
