@@ -75,7 +75,7 @@ internal class CollectForm(context: Context, id: Int, flutterEngine: FlutterEngi
 private fun getDefaultStyles() : Styles {
     val padding = Padding(8, 8, 8, 8)
     val base = Style(
-            Color.BLACK
+            Color.BLACK,
             10f,
             padding,
             1,
@@ -111,5 +111,5 @@ private fun getDefaultStyles() : Styles {
             Color.YELLOW
     )
     val invalid = Style(Color.RED, 10f, padding, 1, R.font.roboto_light, Gravity.START, Color.RED)
-    return Styles(base, complete, error, focus, invalid)
+    return Styles(base, complete, empty, focus, invalid)
 }

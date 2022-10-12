@@ -19,6 +19,6 @@ public class CollectFormFactory(flutterEngine: FlutterEngine, client: Client) : 
     }
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
         val creationParams = args as Map<String?, Any?>?
-        return AndroidTextField(context, viewId, flutterEngine, client, creationParams)
+        return CollectForm(context, viewId, flutterEngine, client, creationParams)
     }
 }
