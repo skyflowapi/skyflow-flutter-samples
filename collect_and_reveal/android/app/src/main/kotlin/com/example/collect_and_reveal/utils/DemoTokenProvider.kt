@@ -1,6 +1,9 @@
 package com.example.collect_and_reveal.utils
 
 import Skyflow.Callback
+import org.json.JSONObject
+import java.io.IOException
+import okhttp3.OkHttpClient
 
 internal class DemoTokenProvider: Skyflow.TokenProvider {
     override fun getBearerToken(callback: Callback) {
@@ -14,7 +17,7 @@ internal class DemoTokenProvider: Skyflow.TokenProvider {
                         if (!response.isSuccessful)
                             throw IOException("Unexpected code $response")
                         val accessTokenObject = JSONObject(
-                            response.body()!!.string().toString()
+                            response.body!!.string().toString()
                             )
                         val accessToken = accessTokenObject["accessToken"]
                         callback.onSuccess("$accessToken")
