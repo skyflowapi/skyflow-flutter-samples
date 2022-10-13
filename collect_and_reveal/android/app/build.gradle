@@ -83,4 +83,5 @@ allprojects {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.0"
     implementation 'com.skyflowapi.android:skyflow-android-sdk:1.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
 }
