@@ -1,13 +1,6 @@
-
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
-
-source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks! :linkage => :static # To load the assets statically from ios sdk into flutter app
 
 target 'Runner' do
-  #use_frameworks!
-
-  # Pods for skyflow-iOS-sample-app
-  pod 'Skyflow'
-
+  pod 'Skyflow', '= 1.17.2'
+  
 end
