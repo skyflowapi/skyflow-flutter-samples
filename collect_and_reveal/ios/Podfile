@@ -1,4 +1,4 @@
-use_frameworks! :linkage => :static 
+use_frameworks! :linkage => :static # To load the assets statically from ios sdk into flutter app
 
 target 'Runner' do
   pod 'Skyflow', '= 1.17.2'
